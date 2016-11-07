@@ -24,7 +24,11 @@ export default class Growls extends Component {
   _handleSubmit(e) {
     e.preventDefault()
     let growl = this.refs.growl.value;
-    firebase.database().ref('/growls').push({ growl }).then(() => {
+    let uid = this.props.user.uid;
+    firebase.database().ref('/growls').push({
+      growl: growl,
+      uid: uid
+     }).then(() => {
       this.refs.growl.value = '';
     })
   }
@@ -37,7 +41,6 @@ export default class Growls extends Component {
         <input type="submit" value="New Growl"/>
       </form>
       <ul>
-        {console.log(this.state.growls)}
         {_.map(this.state.growls, (g, index) => <li key={index}>{g.growl}</li>)}
       </ul>
       </div>
