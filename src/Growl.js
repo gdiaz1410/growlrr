@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import Growls from './Growls.js';
 
 class Growl extends Component {
   render(){
+    // console.log(this.props.growl);
     return(
-      <h4></h4>
+      <li>{this.props.growl}</li>
     )
   }
 }

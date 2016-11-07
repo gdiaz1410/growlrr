@@ -1,6 +1,7 @@
 import Growl from './Growl.js';
 import React, {Component} from 'react';
-import axios from 'axios';
+import firebase from './utils/firebase.js';
+import _ from 'lodash';
 
 export default class Growls extends Component {
   constructor(props) {
@@ -9,12 +10,23 @@ export default class Growls extends Component {
       growls: []
     }
   }
-  // axios.get('https://growlrr-76626.firebaseio.com/').then((data) => {
-  //     console.log(data);
-  // })
+
+  componentDidMount() {
+    firebase.database().ref('/growls').on('value', snapshot => {
+      let growls = snapshot.val();
+      this.setState({ growls });
+    });
+  }
+
   render(){
     return(
+      <div>
       <h1>Hello</h1>
+      <ul>
+        {console.log(this.state.growls)}
+        {_.map(this.state.growls, (g, index) => <li key={index}>{g.growl}</li>)}
+      </ul>
+      </div>
     )
   }
 }
