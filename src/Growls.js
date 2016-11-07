@@ -9,6 +9,7 @@ export default class Growls extends Component {
 
     this._handleSubmit = this._handleSubmit.bind(this)
 
+
     this.state = {
       growls: []
     }
@@ -33,6 +34,13 @@ export default class Growls extends Component {
     })
   }
 
+  _handleDelete(e) {
+    e.preventDefault()
+    // e.stopPropagation()
+    console.log(this);
+    firebase.database().ref(`/growls/${this.props.parent.key}`).remove()
+  }
+
   render(){
     return(
       <div>
@@ -42,7 +50,7 @@ export default class Growls extends Component {
       </form>
       <ul>
         {console.log(this.state.growls)}
-        {_.map(this.state.growls, (g, index) => <li key={index}>{g.growl}{' '}<a href="#">Delete</a></li>)}
+        {_.map(this.state.growls, (g, index) => <li key={index}>{g.growl}{' '}<a href="#" onClick={this._handleDelete}>Delete</a></li>)}
       </ul>
       </div>
     )
