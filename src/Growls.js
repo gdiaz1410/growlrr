@@ -14,18 +14,18 @@ export default class Growls extends Component {
   componentDidMount() {
     firebase.database().ref('/growls').on('value', snapshot => {
       let growls = snapshot.val();
-      this.setState({ growls });
+      this.setState({growls});
     });
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div>
-      <h1>Hello</h1>
-      <ul>
-        {console.log(this.state.growls)}
-        {_.map(this.state.growls, (g, index) => <li key={index}>{g.growl}</li>)}
-      </ul>
+        <ul>
+          {console.log(this.state.growls)}
+          {_.map(this.state.growls, (g, index) => <li key={index}>{g.growl}</li>
+          )}
+        </ul>
       </div>
     )
   }
