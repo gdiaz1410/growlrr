@@ -38,7 +38,7 @@ export default class Growls extends Component {
       </form>
       <ul>
         {console.log(this.state.growls)}
-        {_.map(this.state.growls, (g, index) => <li key={index}>{g.growl}</li>)}
+        {_.map(this.state.growls, (g, index) => <li key={index}>{g.growl}{' '}<a href="#">Delete</a></li>)}
       </ul>
       </div>
     )
