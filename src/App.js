@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from './utils/firebase.js';
 import './App.css';
+import Growls from './Growls.js';
 
 class App extends Component {
   render() {
