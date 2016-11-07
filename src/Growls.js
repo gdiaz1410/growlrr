@@ -6,6 +6,9 @@ import _ from 'lodash';
 export default class Growls extends Component {
   constructor(props) {
     super(props)
+
+    this._handleSubmit = this._handleSubmit.bind(this)
+
     this.state = {
       growls: []
     }
@@ -18,14 +21,25 @@ export default class Growls extends Component {
     });
   }
 
-  render() {
-    return (
+  _handleSubmit(e) {
+    e.preventDefault()
+    let growl = this.refs.growl.value;
+    firebase.database().ref('/growls').push({ growl }).then(() => {
+      this.refs.growl.value = '';
+    })
+  }
+
+  render(){
+    return(
       <div>
-        <ul>
-          {console.log(this.state.growls)}
-          {_.map(this.state.growls, (g, index) => <li key={index}>{g.growl}</li>
-          )}
-        </ul>
+        <form onSubmit={this._handleSubmit}>
+        <input type="text" ref="growl"/>
+        <input type="submit" value="New Growl"/>
+      </form>
+      <ul>
+        {console.log(this.state.growls)}
+        {_.map(this.state.growls, (g, index) => <li key={index}>{g.growl}</li>)}
+      </ul>
       </div>
     )
   }
