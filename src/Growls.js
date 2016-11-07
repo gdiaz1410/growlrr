@@ -24,7 +24,11 @@ export default class Growls extends Component {
   _handleSubmit(e) {
     e.preventDefault()
     let growl = this.refs.growl.value;
-    firebase.database().ref('/growls').push({ growl }).then(() => {
+    let uid = this.props.user.uid;
+    firebase.database().ref('/growls').push({
+      growl: growl,
+      uid: uid
+     }).then(() => {
       this.refs.growl.value = '';
     })
   }

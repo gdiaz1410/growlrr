@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import firebase from './utils/firebase.js';
+import defaultfirebase from 'firebase';
 import './App.css';
 import _ from 'lodash';
 import Growls from './Growls.js';
@@ -37,7 +38,7 @@ class App extends Component {
 
   _handleLogin(e) {
     e.preventDefault();
-    var provider = new firebase.auth.GoogleAuthProvider();
+    var provider = new defaultfirebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider);
   }
 
@@ -55,7 +56,7 @@ class App extends Component {
       <div className="App">
         {this._sessionButton()}
         <h1>Growlrrrr</h1>
-        <Growls/>
+        <Growls user={this.state.user} />
       </div>
     );
   }
